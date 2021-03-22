@@ -24,15 +24,22 @@ export const Add:React.FC<AddProps> = (props:AddProps)=>{
       }, []);
 
       const handleClickUsers = async ()=>{
+        try {
+          
+          await fetch(`api/users`,{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({name:name,email:email,password:password})
+
+        })
+        } catch (error) {
+          console.log(error)
+          
+        }
         
-            await fetch(`api/users`,{
-                method: 'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({name:name,email:email,password:password})
-  
-            })
+           
         
       }
       

@@ -4,6 +4,8 @@ import db from './db'
 const router = express.Router();
 const app = express();
 
+//Get All Users
+
 router.get('/api/users/', async(req,res)=>{
     try {
         res.json(await db.Chirps.allUsers())
@@ -13,6 +15,8 @@ router.get('/api/users/', async(req,res)=>{
     }
 
 })
+
+//Create new user
 
 router.post('/api/users/', async(req,res)=>{
     const chirpDTO = req.body
@@ -26,6 +30,7 @@ router.post('/api/users/', async(req,res)=>{
 
 })
 
+//Get All Chrips
 router.get('/api/chirps', async(req,res)=>{
     try {
         res.json(await db.Chirps.allChirps())
@@ -36,6 +41,7 @@ router.get('/api/chirps', async(req,res)=>{
 
 })
 
+//Get Single Chirp
 router.get('/api/chirps/:id', async(req,res)=>{
     try {
         res.json((await db.Chirps.singleChirp(req.params.id)))
@@ -46,6 +52,7 @@ router.get('/api/chirps/:id', async(req,res)=>{
 
 })
 
+//Delete Chirp
 router.delete('/api/chirps/:id', async(req,res)=>{
     try {
         res.json((await db.Chirps.deleteChirp(req.params.id)))
@@ -56,6 +63,7 @@ router.delete('/api/chirps/:id', async(req,res)=>{
 
 })
 
+//Add Chirp
 router.post('/api/chirps/', async(req,res)=>{
     const chirpDTO = req.body
     try {
@@ -68,6 +76,7 @@ router.post('/api/chirps/', async(req,res)=>{
 
 })
 
+//Update Chirp
 router.put('/api/chirps/:id', async(req,res)=>{
     const chirpDTO = req.body
     try {

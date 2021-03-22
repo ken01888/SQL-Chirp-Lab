@@ -28,25 +28,32 @@ export const Admin: React.FC<AdminProps> = (props: AdminProps) => {
         method: "DELETE",
       });
     } catch (error) {
-      throw error;
+      console.log(error);
     }
     props.history.push("/");
   };
 
   const submitcontent = async () => {
-    await fetch(`/api/chirps/${props.match.params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: content, id: props.match.params.id }),
-    });
+    try {
+      await fetch(`/api/chirps/${props.match.params.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: content, id: props.match.params.id }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
     props.history.push("/");
   };
 
   return (
     <React.Fragment>
       <div className="container ">
+        <Link to={`/`}>
+          <button className="btn text-success">Home Page</button>
+        </Link>
         <div className="row  d-flex justify-content-center ">
           {chirp.map((val) => (
             <div className="card col-5 m-4" key={`adminuuid-${val.id}`}>
@@ -80,7 +87,6 @@ export const Admin: React.FC<AdminProps> = (props: AdminProps) => {
             cols={30}
             rows={10}
             className="form-control"
-            required
           ></textarea>
           <button onClick={submitcontent} className="btn text-success mt-2">
             Click To Update Message
